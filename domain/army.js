@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.schema
-const armySchema = new Schema({
+const armySchema = new mongoose.Schema({
   name: String,
   squads: Number,
-  webHook: String
+  webHook: String,
+  alive: Boolean
 })
-module.exports = armySchema
+module.exports = mongoose.model('Army', armySchema)

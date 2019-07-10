@@ -1,9 +1,13 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const routes = require('./routes/routes')
 
 const app = express()
 const PORT = 3000
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 routes(app)
 mongoose.connect('mongodb://localhost/battle', { useNewUrlParser: true })
