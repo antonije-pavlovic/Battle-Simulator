@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server",
+    "client1": "node ./clients/client1",
+    "start": "concurrently \"npm run server\" \"npm run client1\""
   },
   "author": "",
   "license": "ISC",
@@ -13,10 +15,12 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
     "express": "^4.17.1",
     "http": "0.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.4",
+    "node-webhooks": "^1.4.2",
     "request": "^2.88.0"
   }
 }

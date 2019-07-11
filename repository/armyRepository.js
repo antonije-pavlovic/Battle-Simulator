@@ -1,17 +1,18 @@
 const Army = require('../domain/army')
 const TokenService = require('../services/tokenService')
 const config = require('../env')
+const WebHook = require('../helpers/webHooks')
 
 class ArmyRepository {
-  static register (name, numOfSquads, webHook) {
+  static register (name, squads, webHook) {
     const army = new Army({
       name,
-      numOfSquads,
+      squads,
       webHook
     })
     army.save()
     const armyId = army._id
-    // ovde webhook army.join type == new
+    WebHook.join(army, ArmyRepository.getAlive(), 'new')
     return TokenService.getToken(
       { armyId, name, webHook },
       config.secret,
@@ -24,12 +25,16 @@ class ArmyRepository {
   static join (token, callback) {
     TokenService.decodeToken(token, config.secret)
       .then((data) => {
-        console.log(data)
-        // webhook army.join type == returned
+        // console.log(data)
+        WebHook.join(data, ArmyRepository.getAlive(), 'returned')
         return callback(data)
       }).catch(() => {
         return callback()
       })
+  }
+
+  static getAlive () {
+    return Army.find({ squads: { $gt: 0 } })
   }
 }
 module.exports = ArmyRepository
