@@ -6,7 +6,8 @@
   "scripts": {
     "server": "node server",
     "client1": "node ./clients/client1",
-    "start": "concurrently \"npm run server\" \"npm run client1\""
+    "client2": "node ./clients/client2",
+    "start": "concurrently \"npm run server\" \"npm run client1\" \"npm run client2\""
   },
   "author": "",
   "license": "ISC",

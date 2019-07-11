@@ -8,6 +8,13 @@ exports.join = (army, armies, type) => {
     })
     const { urls } = await hooks.getDB()
     urls.map(url => hooks.add('join', `${url}/join`))
-    hooks.trigger('join', { data: army })
+    hooks.trigger('join', { army, type })
+    const emitter = hooks.getEmitter()
+    emitter.on('*.success', (shortname, statusCode, body) => {
+      console.log(statusCode)
+    })
+    emitter.on('*.failure', (shortname, statusCode, body) => {
+      console.log(statusCode)
+    })
   })
 }
