@@ -4,6 +4,6 @@ const armySchema = new mongoose.Schema({
   name: String,
   squads: Number,
   webHook: String,
-  alive: Boolean
+  active: Boolean
 })
 module.exports = mongoose.model('Army', armySchema)

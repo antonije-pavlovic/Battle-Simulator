@@ -8,7 +8,8 @@ class ArmyRepository {
     const army = new Army({
       name,
       squads,
-      webHook
+      webHook,
+      active: true
     })
     army.save()
     const armyId = army._id
@@ -34,7 +35,7 @@ class ArmyRepository {
   }
 
   static getAlive () {
-    return Army.find({ squads: { $gt: 0 } })
+    return Army.find({ squads: { $gt: 0 }, active: true })
   }
 }
 module.exports = ArmyRepository

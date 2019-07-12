@@ -1,6 +1,8 @@
+const BattleRepository = require('../repository/BattleRepository')
+
 exports.attack = (req, res) => {
   //  do something
 }
 exports.leave = (req, res) => {
-  //  do something
+  BattleRepository.leave(req.params.token)
 }

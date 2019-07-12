@@ -9,11 +9,9 @@ const routes = (app) => {
       Auth.registerArmy(req, res)
     }
   })
-  app.put('/api/attack/:armyId', (req, res) => {
+  app.put('/api/attack/:armyId/:token', (req, res) => {
     Battle.attack(req, res)
   })
-  app.put('/api/leave', (req, res) => {
-    Battle.leave(req, res)
-  })
+  app.put('/api/leave/:token', Battle.leave)
 }
 module.exports = routes

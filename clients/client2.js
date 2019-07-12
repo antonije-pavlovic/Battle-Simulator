@@ -7,7 +7,7 @@ const app = express()
 const PORT = 3006
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-const armies = []
+let armies = []
 let token = ''
 
 app.post('/join', (req, res) => {
@@ -15,6 +15,13 @@ app.post('/join', (req, res) => {
   console.log(req.body)
   res.sendStatus(200) //  mora api da saceka 200
   armies.push(req.body.data)
+})
+
+app.post('/leave', (req, res) => {
+  console.log('clieant 2')
+  console.log(req.body)
+  res.sendStatus(200) //  mora api da saceka 200
+  armies = req.body.data
 })
 
 setTimeout(() => {
