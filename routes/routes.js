@@ -1,5 +1,5 @@
 const Auth = require('../controllers/authController')
-const Battle = require('../controllers/battleController')
+const { repeatHelper, attack, leave } = require('../controllers/battleController')
 
 const routes = (app) => {
   app.post('/api/join/:token?', (req, res) => {
@@ -9,9 +9,7 @@ const routes = (app) => {
       Auth.registerArmy(req, res)
     }
   })
-  app.put('/api/attack/:armyId/:token', (req, res) => {
-    Battle.attack(req, res)
-  })
-  app.put('/api/leave/:token', Battle.leave)
+  app.put('/api/attack/:armyId/:token', repeatHelper, attack)
+  app.put('/api/leave/:token', leave)
 }
 module.exports = routes

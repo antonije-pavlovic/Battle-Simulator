@@ -5,7 +5,7 @@ const strategy = require('../helpers/clientStrategy')
 const delayFun = require('../helpers/delayHelper')
 
 const app = express()
-const PORT = 3005
+const PORT = 3007
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let armies = []
@@ -13,7 +13,7 @@ let token = ''
 const army = {
   name: 'army 1',
   numOfSquads: 150,
-  webHook: 'http://localhost:3005'
+  webHook: 'http://localhost:3007'
 }
 app.post('/join', (req, res) => {
   console.log('clieant 1')

@@ -14,5 +14,4 @@ class BattleService {
   static recivedDemaga (squads) {
     return squads / 100 * 10
   }
-
 }
