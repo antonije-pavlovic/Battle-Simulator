@@ -1,10 +1,12 @@
 class BattleService {
   static chances (numOfSquads) {
-    return 100 / numOfSquads
+    const data = 100 / numOfSquads
+    console.log(data)
   }
 
   static probability (n) {
-    return !!n && Math.random() <= n
+    const prob = !!n && Math.random() <= n
+    console.log('mogucnost' + prob)
   }
 
   static attackDamage (repeats, squads) {
@@ -15,3 +17,4 @@ class BattleService {
     return squads / 100 * 10
   }
 }
+module.exports = BattleService

@@ -11,7 +11,7 @@ class BattleRepository {
       .then(async (data) => {
         let type
         // eslint-disable-next-line no-underscore-dangle
-        let army = await Army.findOne({ _id: data.armyId })
+        const army = await Army.findOne({ _id: data.armyId })
         army.active = false
         console.log(army)
         army.save()
@@ -30,22 +30,27 @@ class BattleRepository {
   }
 
   static attack (repeats, token) {
-    TokenService.decodeToken(token, config.secret)
-      .then(async (data) => {
-        const chances = BattleService.chances(data.squads)
-        const probability = BattleService.probability(chances)
-        if (probability) {
-          const attackDemage = BattleService.attackDamage(repeats, data.squads)
-          const recivedDamage = BattleService.recivedDemaga(data.squads)
-          return {
-            attackDemage,
-            recivedDamage
+    return new Promise((resolve, reject) => {
+      TokenService.decodeToken(token, config.secret)
+        .then(async (data) => {
+          const army = await ArmyRepository.getArmyById(data.armyId)
+          console.log('-------atack method')
+          const chances = BattleService.chances(army.squads)
+          const probability = BattleService.probability(chances)
+          if (probability) {
+            const attackDemage = BattleService.attackDamage(repeats, army.squads)
+            const recivedDamage = BattleService.recivedDemaga(army.squads)
+            resolve({
+              attackDemage,
+              recivedDamage
+            })
           }
-        }
-        return { attack: 'attack unsucessufull', recivedDemage: '0' }
-      }).catch((err) => {
-        console.log(err)
-      })
+          // eslint-disable-next-line prefer-promise-reject-errors
+          reject({ attack: 'attack unsucessufull', recivedDemage: '0' })
+        }).catch((err) => {
+          console.log(err)
+        })
+    })
   }
 }
 module.exports = BattleRepository

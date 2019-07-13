@@ -6,9 +6,11 @@ exports.attack = (req, res) => {
   if (!token) {
     return res.sendStatus(401).json('Token isnt provided')
   }
+  console.log('battle controller attack')
   counters[token] += 1
-  const battleStatistic = BattleRepository.attack(counters[token], req.params.token)
-  return res.sendStatus(200).json(battleStatistic)
+  BattleRepository.attack(counters[token], req.params.token)
+    .then(battleStatistic => res.status(200).send(battleStatistic))
+    .catch(battleStatistic => res.status(201).send(battleStatistic))
 }
 exports.leave = (req, res) => {
   BattleRepository.leave(req.params.token)

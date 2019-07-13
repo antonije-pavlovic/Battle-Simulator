@@ -2,8 +2,10 @@ const jwt = require('jsonwebtoken')
 
 class TokenService {
   static getToken (army, secret, options) {
-    const token = jwt.sign(army, secret, { expiresIn: options.tokenLife })
-    return token
+    return new Promise((resolve, reject) => {
+      const token = jwt.sign(army, secret, { expiresIn: options.tokenLife })
+      resolve(token)
+    })
   }
 
   static decodeToken (token, secret) {
