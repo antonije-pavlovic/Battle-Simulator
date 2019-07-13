@@ -1,7 +1,8 @@
 const Army = require('../domain/army')
 const TokenService = require('../services/tokenService')
 const config = require('../env')
-const WebHook = require('../helpers/webHooks')
+const { join } = require('../helpers/webHooks')
+const ActivityRepository = require('./activityRepository')
 
 class ArmyRepository {
   static async register (name, squads, webHook) {
@@ -13,9 +14,10 @@ class ArmyRepository {
         active: true
       })
       army.save()
+      ActivityRepository.siteActivity(name, 'registered')
       const armyId = army._id
       const armies = ArmyRepository.getAlive()
-      WebHook.join(army, armies, 'new')
+      join(army, armies, 'new')
       TokenService.getToken(
         { armyId, name, webHook },
         config.secret,
@@ -30,7 +32,7 @@ class ArmyRepository {
     TokenService.decodeToken(token, config.secret)
       .then((data) => {
         // console.log(data)
-        WebHook.join(data, ArmyRepository.getAlive(), 'returned')
+        join(data, ArmyRepository.getAlive(), 'returned')
         return callback(data)
       })
       .catch(() => callback())
@@ -38,7 +40,7 @@ class ArmyRepository {
 
   static async getAlive () {
     return Army.find({ squads: { $gt: 0 }, active: true })
-    // ubaci da i razlicito od armyid d ne stize samom sebi poruka
+    // ubaci da i razlicito od armyid da ne stize samom sebi poruka
   }
 
   static getArmyById (id) {

@@ -1,12 +1,12 @@
-const Auth = require('../controllers/authController')
+const { joinArmy, registerArmy } = require('../controllers/authController')
 const { repeatHelper, attack, leave } = require('../controllers/battleController')
 
 const routes = (app) => {
   app.post('/api/join/:token?', (req, res) => {
     if (req.params.token) {
-      Auth.joinArmy(req, res)
+      joinArmy(req, res)
     } else {
-      Auth.registerArmy(req, res)
+      registerArmy(req, res)
     }
   })
   app.put('/api/attack/:armyId/:token', repeatHelper, attack)

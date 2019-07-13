@@ -1,6 +1,1 @@
-exports.delayFun = (ms) => {
-  console.log('dosao u promis')
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, ms )
-  })
-}
+exports.delayFun = ms => new Promise((resolve, reject) => setTimeout(resolve, ms))

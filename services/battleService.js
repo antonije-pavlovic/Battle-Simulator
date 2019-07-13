@@ -7,6 +7,7 @@ class BattleService {
   static probability (n) {
     const prob = !!n && Math.random() <= n
     console.log('mogucnost' + prob)
+    return prob
   }
 
   static attackDamage (repeats, squads) {

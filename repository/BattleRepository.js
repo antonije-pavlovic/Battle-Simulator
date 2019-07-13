@@ -1,6 +1,6 @@
 const TokenService = require('../services/tokenService')
 const config = require('../env')
-const WebHook = require('../helpers/webHooks')
+const { leave } = require('../helpers/webHooks')
 const Army = require('../domain/army')
 const ArmyRepository = require('../repository/armyRepository')
 const BattleService = require('../services/battleService')
@@ -22,7 +22,7 @@ class BattleRepository {
               type = 'dead'
             }
             // eslint-disable-next-line no-underscore-dangle
-            WebHook.leave(army._id, ArmyRepository.getAlive(), type)
+            leave(army._id, ArmyRepository.getAlive(), type)
           })
       }).catch((err) => {
         console.log(err)

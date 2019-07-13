@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
-const strategy = require('../helpers/clientStrategy')
-const delayHelper = require('../helpers/delayHelper')
+const { strategy } = require('../helpers/clientStrategy')
+const { delayFun } = require('../helpers/delayHelper')
 
 const app = express()
 const PORT = 3007
@@ -21,7 +21,6 @@ app.post('/join', (req, res) => {
   console.log('client 1 join --------------')
   res.status(200).send(token) //  mora api da saceka 200
   armies.push(req.body.army)
-
 })
 
 app.post('/leave', (req, res) => {
@@ -42,7 +41,7 @@ app.post('/leave', (req, res) => {
 //       if (i >= army.numOfSquads) {
 //         return false
 //       }
-//       await delayHelper.delayFun(Math.floor(army.numOfSquads / 10))
+//       await delayFun(Math.floor(army.numOfSquads / 10))
 //       request.put(`http://localhost:4000/api/attack/${id}/${token}`, (error, response, body) => {
 //         if (!error) {
 //           if (response.statusCode === 200) {
