@@ -9,8 +9,6 @@ exports.join = (army, armies, type) => {
         httpSuccessCodes: [200, 201]
       })
       const { urls } = await hooks.getDB()
-      // console.log(army)
-      // console.log(urls)
       urls.map(url => hooks.add('join', `${url}/join`))
       hooks.trigger('join', { data, type, army })
       const emitter = hooks.getEmitter()
@@ -35,8 +33,6 @@ exports.leave = (armyId, armies, type) => {
 }
 
 exports.update = async (army, data) => {
-  console.log('to je ta vojska');
-  console.log(army)
   const hooks = new WebHooks({
     db: { urls: army.map(url => url.webHook) },
     httpSuccessCodes: [200, 201]

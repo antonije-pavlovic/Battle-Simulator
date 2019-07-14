@@ -12,25 +12,25 @@ let armies = []
 let token = ''
 
 const army = {
-  name: 'army 2',
-  numOfSquads: 80,
+  name: 'Tor',
+  numOfSquads: 95,
   webHook: 'http://localhost:3002'
 }
 
 app.post('/join', (req, res) => {
-  console.log(`client 2 join -------------- army joined ${req.body.army.name}, type of join ${req.body.typ}`)
+  console.log(`Tor join`)
   res.status(200).send(token)
   armies = req.body.data
 })
 
 app.post('/update', (req, res) => {
-  console.log(`client 2 update`)
+  console.log(`Tor update`)
   res.status(200).send(token)
   console.log(`you have been attacked: armyId: ${req.body.armyId}, squadsCount: ${req.body.squadsCount}, rankRate: ${req.body.rankRate}`)
 })
 
 app.post('/leave', (req, res) => {
-  console.log('client 2 leave')
+  console.log('Tor leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
   res.sendStatus(200)
@@ -38,18 +38,18 @@ app.post('/leave', (req, res) => {
 })
 
 setTimeout(async () => {
-  console.log('client 2 attack')
   const id = strategy(armies, 'weakest')
-  console.log(`choosen army ${id}`)
+  console.log(`Tor chose ${id} to attack`)
   try {
     (async function loop (i) {
       if (i >= army.numOfSquads) {
         return false
       }
       await delayFun(Math.floor(army.numOfSquads / 10))
-      request.put(`http://localhost:4000/api/attack/${id}/${token}`, (error, response, body) => {
+      request.put(`http://localhost:3000/api/attack/${id}/${token}`, (error, response, body) => {
         if (!error) {
-          if (response.body.success) {
+          body = JSON.parse(body)
+          if (body.success) {
             console.log(body)
             return false
           }
@@ -67,17 +67,16 @@ setTimeout(async () => {
 
 setTimeout(() => {
   request.post(
-    'http://localhost:4000/api/join',
+    'http://localhost:3000/api/join',
     { json: army }, (error, response, body) => {
       if (!error) {
         // eslint-disable-next-line prefer-destructuring
         token = body.token
-        console.log(body)
       }
     }
   )
 }, 4500)
 
 app.listen(PORT, () => {
-  console.log('CLIENT 2')
+  console.log(`TOR is listening on port: ${PORT}`)
 })

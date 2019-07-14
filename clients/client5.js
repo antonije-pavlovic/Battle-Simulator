@@ -5,32 +5,32 @@ const { strategy } = require('../helpers/clientStrategy')
 const { delayFun } = require('../helpers/delayHelper')
 
 const app = express()
-const PORT = 3001
+const PORT = 3005
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let armies = []
 let token = ''
 
 const army = {
-  name: 'Hulk',
-  numOfSquads: 70,
-  webHook: 'http://localhost:3001'
+  name: 'Black Phanter',
+  numOfSquads: 60,
+  webHook: 'http://localhost:3005'
 }
 
 app.post('/join', (req, res) => {
-  console.log(`Hulk join`)
+  console.log(`Black Phanter join`)
   res.status(200).send(token)
   armies = req.body.data
 })
 
 app.post('/update', (req, res) => {
-  console.log(`Hulk update`)
+  console.log(`Black Phanter update`)
   res.status(200).send(token)
   console.log(`you have been attacked: armyId: ${req.body.armyId}, squadsCount: ${req.body.squadsCount}, rankRate: ${req.body.rankRate}`)
 })
 
 app.post('/leave', (req, res) => {
-  console.log('Hulk leave')
+  console.log('Black Phanter leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
   res.sendStatus(200)
@@ -38,8 +38,8 @@ app.post('/leave', (req, res) => {
 })
 
 setTimeout(async () => {
-  const id = strategy(armies, 'strongest')
-  console.log(`Hulk  chose ${id} to attack`)
+  const id = strategy(armies, 'random')
+  console.log(`Black Phanter chose ${id} to attack`)
   try {
     (async function loop (i) {
       if (i >= army.numOfSquads) {
@@ -64,7 +64,7 @@ setTimeout(async () => {
   } catch (e) {
     console.log(e)
   }
-}, 10000)
+}, 14000)
 
 setTimeout(() => {
   request.post(
@@ -76,8 +76,8 @@ setTimeout(() => {
       }
     }
   )
-}, 3000)
+}, 7500)
 
 app.listen(PORT, () => {
-  console.log(`HULK is listening on port: ${PORT}`)
+  console.log(`BLACK PANTHER is listening on port: ${PORT}`)
 })

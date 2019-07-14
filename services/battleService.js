@@ -1,13 +1,9 @@
 function chances (numOfSquads) {
-  const data = numOfSquads / 100
-  console.log(data)
-  return data
+  return numOfSquads / 100
 }
 
 function probability (n) {
-  const prob = !!n && Math.random() <= n
-  console.log('mogucnost' + prob)
-  return prob
+  return !!n && Math.random() <= n
 }
 
 function attackDamage (repeats, squads) {
@@ -17,4 +13,9 @@ function attackDamage (repeats, squads) {
 function recivedDemage (squads) {
   return squads / 100 * 10
 }
-module.exports = {chances, probability, attackDamage, recivedDemage}
+module.exports = {
+  chances,
+  probability,
+  attackDamage,
+  recivedDemage
+}

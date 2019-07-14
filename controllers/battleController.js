@@ -7,7 +7,6 @@ exports.attack = (req, res) => {
   if (!token) {
     return res.sendStatus(401).json('Token isnt provided')
   }
-  console.log('battle controller attack')
   counters[token] += 1
   attack(counters[token], token, armyId)
     .then(battleStatistic => res.status(200).send(battleStatistic))

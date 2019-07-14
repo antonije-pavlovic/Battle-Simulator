@@ -80,6 +80,7 @@ async function attack (repeats, token, armyId) {
       const chance = chances(army.squads)
       const prob = probability(chance)
       if (prob) {
+        battleActivity(army.name, 'succeffuly attacked', attackedArmy.name)
         const attackDemage = attackDamage(repeats, army.squads)
         const recivedDamage = recivedDemage(attackedArmy.squads)
         attackedArmy.squads -= attackDemage
@@ -87,9 +88,11 @@ async function attack (repeats, token, armyId) {
         attackedArmy.save()
         army.save()
         if (army.squads <= 0) {
+          battleActivity(attackedArmy.name, 'killed', army.name)
           await armyDead(army._id)
         }
         if (attackedArmy.squads <= 0) {
+          battleActivity(army.name, 'killed', attackedArmy.name)
           await armyDead(attackedArmy._id)
         }
         const rank = await rankRate(attackedArmy._id, await getOrderedArmies())

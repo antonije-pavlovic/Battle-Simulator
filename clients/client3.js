@@ -5,32 +5,32 @@ const { strategy } = require('../helpers/clientStrategy')
 const { delayFun } = require('../helpers/delayHelper')
 
 const app = express()
-const PORT = 3001
+const PORT = 3003
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 let armies = []
 let token = ''
 
 const army = {
-  name: 'Hulk',
-  numOfSquads: 70,
-  webHook: 'http://localhost:3001'
+  name: '',
+  numOfSquads: 80,
+  webHook: 'http://localhost:3003'
 }
 
 app.post('/join', (req, res) => {
-  console.log(`Hulk join`)
+  console.log(`Wolverine join`)
   res.status(200).send(token)
   armies = req.body.data
 })
 
 app.post('/update', (req, res) => {
-  console.log(`Hulk update`)
+  console.log(`Wolverine update`)
   res.status(200).send(token)
   console.log(`you have been attacked: armyId: ${req.body.armyId}, squadsCount: ${req.body.squadsCount}, rankRate: ${req.body.rankRate}`)
 })
 
 app.post('/leave', (req, res) => {
-  console.log('Hulk leave')
+  console.log('Wolverine leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
   res.sendStatus(200)
@@ -38,8 +38,9 @@ app.post('/leave', (req, res) => {
 })
 
 setTimeout(async () => {
-  const id = strategy(armies, 'strongest')
-  console.log(`Hulk  chose ${id} to attack`)
+  console.log('client 3 attack')
+  const id = strategy(armies, 'random')
+  console.log(`Wolverine chose ${id} to attack`)
   try {
     (async function loop (i) {
       if (i >= army.numOfSquads) {
@@ -48,7 +49,6 @@ setTimeout(async () => {
       await delayFun(Math.floor(army.numOfSquads / 10))
       request.put(`http://localhost:3000/api/attack/${id}/${token}`, (error, response, body) => {
         if (!error) {
-          // eslint-disable-next-line no-param-reassign
           body = JSON.parse(body)
           if (body.success) {
             console.log(body)
@@ -64,7 +64,7 @@ setTimeout(async () => {
   } catch (e) {
     console.log(e)
   }
-}, 10000)
+}, 12000)
 
 setTimeout(() => {
   request.post(
@@ -76,8 +76,8 @@ setTimeout(() => {
       }
     }
   )
-}, 3000)
+}, 5500)
 
 app.listen(PORT, () => {
-  console.log(`HULK is listening on port: ${PORT}`)
+  console.log(`WOLVERINE is listening on port: ${PORT}`)
 })
