@@ -1,21 +1,21 @@
-const { leaveArmy, attack } = require('../repository/armyRepository')
+const { leaveBattle, attack } = require('../repository/armyRepository')
 
 const counters = {}
 
 exports.attack = (req, res) => {
-  const { token } = req.params
+  const { token, armyId } = req.params
   if (!token) {
     return res.sendStatus(401).json('Token isnt provided')
   }
   console.log('battle controller attack')
   counters[token] += 1
-  attack(counters[token], token)
+  attack(counters[token], token, armyId)
     .then(battleStatistic => res.status(200).send(battleStatistic))
     .catch(battleStatistic => res.status(201).send(battleStatistic))
 }
 
 exports.leave = (req, res) => {
-  leaveArmy(req.params.token)
+  leaveBattle(req.params.token)
 }
 
 exports.repeatHelper = (req, res, next) => {
