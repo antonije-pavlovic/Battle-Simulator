@@ -1,22 +1,21 @@
 const jwt = require('jsonwebtoken')
 
-class TokenService {
-  static getToken (army, secret, options) {
-    return new Promise((resolve, reject) => {
-      const token = jwt.sign(army, secret, { expiresIn: options.tokenLife })
-      resolve(token)
-    })
-  }
-
-  static decodeToken (token, secret) {
-    return new Promise((resolve, reject) => {
-      jwt.verify(token, secret, (err, decode) => {
-        if (err) {
-          reject()
-        }
-        resolve(decode)
-      })
-    })
-  }
+function getToken (army, secret, options) {
+  return new Promise((resolve, reject) => {
+    const token = jwt.sign(army, secret, { expiresIn: options.tokenLife })
+    resolve(token)
+  })
 }
-module.exports = TokenService
+
+function decodeToken (token, secret) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, secret, (err, decode) => {
+      if (err) {
+        reject(err)
+      }
+      resolve(decode)
+    })
+  })
+}
+
+module.exports = { getToken, decodeToken }

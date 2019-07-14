@@ -13,7 +13,7 @@ let token = ''
 
 const army = {
   name: 'army 1',
-  numOfSquads: 15,
+  numOfSquads: 100,
   webHook: 'http://localhost:3007'
 }
 
@@ -31,34 +31,34 @@ app.post('/leave', (req, res) => {
   armies = req.body.data
 })
 
-// setTimeout(async () => {
-//   console.log('client 1 attack')
-//   const id = strategy(armies, 'strongest')
-//   console.log(`choosen army ${id}`)
-//   try {
-//     // for (let i = 0; i < army.numOfSquads; i + 1) {
-//     (async function loop (i) {
-//       if (i >= army.numOfSquads) {
-//         return false
-//       }
-//       await delayFun(Math.floor(army.numOfSquads / 10))
-//       request.put(`http://localhost:4000/api/attack/${id}/${token}`, (error, response, body) => {
-//         if (!error) {
-//           if (response.statusCode === 200) {
-//             console.log(body)
-//             return false
-//           }
-//           console.log(body)
-//           i += 1
-//           return loop(i)
-//         }
-//         return loop(i)
-//       })
-//     })(0)
-//   } catch (e) {
-//     console.log(e)
-//   }
-// }, 6000)
+setTimeout(async () => {
+  console.log('client 1 attack')
+  const id = strategy(armies, 'strongest')
+  console.log(`choosen army ${id}`)
+  try {
+    // for (let i = 0; i < army.numOfSquads; i + 1) {
+    (async function loop (i) {
+      if (i >= army.numOfSquads) {
+        return false
+      }
+      await delayFun(Math.floor(army.numOfSquads / 10))
+      request.put(`http://localhost:4000/api/attack/${id}/${token}`, (error, response, body) => {
+        if (!error) {
+          if (response.statusCode === 200) {
+            console.log(body)
+            return false
+          }
+          console.log(body)
+          i += 1
+          return loop(i)
+        }
+        return loop(i)
+      })
+    })(0)
+  } catch (e) {
+    console.log(e)
+  }
+}, 6000)
 
 setTimeout(() => {
   request.post(

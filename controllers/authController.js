@@ -1,4 +1,4 @@
-const ArmyRepository = require('../repository/armyRepository')
+const { register, joinArmy } = require('../repository/armyRepository')
 
 exports.registerArmy = (req, res) => {
   const { name, numOfSquads, webHook } = req.body
@@ -9,12 +9,12 @@ exports.registerArmy = (req, res) => {
     return res.status(422).send('Enter name and webHook')
   }
   console.log(req.body)
-  ArmyRepository.register(name, numOfSquads, webHook)
+  register(name, numOfSquads, webHook)
     .then(token => res.json({ statusCode: 200, token }))
 }
 
 exports.joinArmy = (req, res) => {
-  ArmyRepository.join(req.params.token, (data) => {
+  joinArmy(req.params.token, (data) => {
     console.log(data)
     if (data) {
       return res.json({ statusCode: 200, message: 'Succesufylly joined' })

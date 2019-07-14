@@ -1,4 +1,4 @@
-const BattleRepository = require('../repository/BattleRepository')
+const { leaveArmy, attack } = require('../repository/armyRepository')
 
 const counters = {}
 
@@ -9,13 +9,13 @@ exports.attack = (req, res) => {
   }
   console.log('battle controller attack')
   counters[token] += 1
-  BattleRepository.attack(counters[token], token)
+  attack(counters[token], token)
     .then(battleStatistic => res.status(200).send(battleStatistic))
     .catch(battleStatistic => res.status(201).send(battleStatistic))
 }
 
 exports.leave = (req, res) => {
-  BattleRepository.leave(req.params.token)
+  leaveArmy(req.params.token)
 }
 
 exports.repeatHelper = (req, res, next) => {

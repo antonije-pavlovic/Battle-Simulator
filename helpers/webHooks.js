@@ -1,5 +1,5 @@
 const WebHooks = require('node-webhooks')
-const BattleRepository = require('../repository/BattleRepository')
+const { leaveArmy } = require('../repository/armyRepository')
 
 exports.join = (army, armies, type) => {
   armies
@@ -16,7 +16,7 @@ exports.join = (army, armies, type) => {
       const emitter = hooks.getEmitter()
       emitter.on('*.success', (shortname, statusCode, body) => {
         if (statusCode !== 200) {
-          BattleRepository.leave(body)
+          leaveArmy(body)
         }
       })
     })

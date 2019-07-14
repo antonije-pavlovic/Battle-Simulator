@@ -1,21 +1,20 @@
-class BattleService {
-  static chances (numOfSquads) {
-    const data = 100 / numOfSquads
-    console.log(data)
-  }
-
-  static probability (n) {
-    const prob = !!n && Math.random() <= n
-    console.log('mogucnost' + prob)
-    return prob
-  }
-
-  static attackDamage (repeats, squads) {
-    return squads / repeats
-  }
-
-  static recivedDemaga (squads) {
-    return squads / 100 * 10
-  }
+function chances (numOfSquads) {
+  const data = numOfSquads / 100
+  console.log(data)
+  return data
 }
-module.exports = BattleService
+
+function probability (n) {
+  const prob = !!n && Math.random() <= n
+  console.log('mogucnost' + prob)
+  return prob
+}
+
+function attackDamage (repeats, squads) {
+  return squads / repeats
+}
+
+function recivedDemage (squads) {
+  return squads / 100 * 10
+}
+module.exports = {chances, probability, attackDamage, recivedDemage}
