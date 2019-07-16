@@ -1,5 +1,6 @@
 # Battle-Simulator
 Instructions:
+
 1.Make env.json file like envExample.json
 
 2.npm install
