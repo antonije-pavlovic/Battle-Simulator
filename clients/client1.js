@@ -19,19 +19,16 @@ const army = {
 }
 
 app.post('/join', (req, res) => {
-  console.log(`Hulk join`)
   res.status(200).send(token)
   armies = popMeOut(req.body.data, army.name)
 })
 
 app.post('/update', (req, res) => {
-  console.log(`Hulk update`)
   res.status(200).send(token)
   console.log(`you have been attacked: armyId: ${req.body.armyId}, squadsCount: ${req.body.squadsCount}, rankRate: ${req.body.rankRate}`)
 })
 
 app.post('/leave', (req, res) => {
-  console.log(`Hulk leave`)
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
   res.sendStatus(200).send(token)
@@ -68,7 +65,7 @@ setTimeout(async () => {
   } catch (e) {
     console.log(e.message)
   }
-}, 8000)
+}, 9000)
 
 setTimeout(() => {
   request.post(
