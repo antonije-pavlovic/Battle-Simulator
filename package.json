@@ -10,8 +10,7 @@
     "client3": "node ./clients/client3",
     "client4": "node ./clients/client4",
     "client5": "node ./clients/client5",
-    "client6": "node ./clients/client6",
-    "start": "concurrently \"npm run server\" \"npm run client1\" \"npm run client2\" \"npm run client3\" \"npm run client4\" \"npm run client5\" \"npm run client6\""
+    "start": "concurrently \"npm run server\" \"npm run client1\" \"npm run client2\" \"npm run client3\" \"npm run client4\" \"npm run client5\""
   },
   "author": "",
   "license": "ISC",

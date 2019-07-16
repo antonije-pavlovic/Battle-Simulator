@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const { strategy } = require('../helpers/clientStrategy')
 const { delayFun } = require('../helpers/delayHelper')
+const { popMeOut } = require('../helpers/popMeOut')
 
 const app = express()
 const PORT = 3003
@@ -12,15 +13,15 @@ let armies = []
 let token = ''
 
 const army = {
-  name: '',
-  numOfSquads: 80,
+  name: 'Wolverine',
+  numOfSquads: 40,
   webHook: 'http://localhost:3003'
 }
 
 app.post('/join', (req, res) => {
   console.log(`Wolverine join`)
   res.status(200).send(token)
-  armies = req.body.data
+  armies = popMeOut(req.body.data, army.name)
 })
 
 app.post('/update', (req, res) => {
@@ -33,12 +34,12 @@ app.post('/leave', (req, res) => {
   console.log('Wolverine leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
-  res.sendStatus(200)
-  armies = req.body.data
+  res.sendStatus(200).send(token)
+  armies = popMeOut(req.body.data, army.name)
 })
 
 setTimeout(async () => {
-  console.log('client 3 attack')
+  console.log('Wolverine  attack')
   const id = strategy(armies, 'random')
   console.log(`Wolverine chose ${id} to attack`)
   try {
@@ -46,10 +47,14 @@ setTimeout(async () => {
       if (i >= army.numOfSquads) {
         return false
       }
-      await delayFun(Math.floor(army.numOfSquads / 10))
+      // await delayFun(Math.floor(army.numOfSquads / 10))
       request.put(`http://localhost:3000/api/attack/${id}/${token}`, (error, response, body) => {
         if (!error) {
           body = JSON.parse(body)
+          if (body.msg) {
+            console.log(body)
+            return false
+          }
           if (body.success) {
             console.log(body)
             return false
@@ -62,9 +67,9 @@ setTimeout(async () => {
       })
     })(0)
   } catch (e) {
-    console.log(e)
+    console.log(e.message)
   }
-}, 12000)
+}, 8000)
 
 setTimeout(() => {
   request.post(
@@ -76,7 +81,7 @@ setTimeout(() => {
       }
     }
   )
-}, 5500)
+}, 4500)
 
 app.listen(PORT, () => {
   console.log(`WOLVERINE is listening on port: ${PORT}`)

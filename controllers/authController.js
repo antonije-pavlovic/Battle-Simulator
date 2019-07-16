@@ -8,7 +8,6 @@ exports.registerArmy = (req, res) => {
   if (!name || !webHook) {
     return res.status(422).send('Enter name and webHook')
   }
-  console.log(req.body)
   register(name, numOfSquads, webHook)
     .then(token => res.json({ statusCode: 200, token }))
 }

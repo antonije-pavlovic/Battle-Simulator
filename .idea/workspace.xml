@@ -5,11 +5,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clients/client1.js" beforeDir="false" afterPath="$PROJECT_DIR$/clients/client1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clients/client2.js" beforeDir="false" afterPath="$PROJECT_DIR$/clients/client2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/battleController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/battleController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helpers/webHooks.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/webHooks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/client3.js" beforeDir="false" afterPath="$PROJECT_DIR$/clients/client3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/client4.js" beforeDir="false" afterPath="$PROJECT_DIR$/clients/client4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/client5.js" beforeDir="false" afterPath="$PROJECT_DIR$/clients/client5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/client6.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/clientStrategy.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/clientStrategy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/delayHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/delayHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repository/armyRepository.js" beforeDir="false" afterPath="$PROJECT_DIR$/repository/armyRepository.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/battleService.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/battleService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -24,28 +28,55 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/helpers/webHooks.js">
+        <entry file="file://$PROJECT_DIR$/clients/client1.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/helpers/clientStrategy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+            <state relative-caret-position="259">
+              <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/repository/armyRepository.js">
+        <entry file="file://$PROJECT_DIR$/clients/client2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+            <state relative-caret-position="283">
+              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="12" column="143" selection-start-line="12" selection-start-column="143" selection-end-line="12" selection-end-column="143" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clients/client3.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clients/client4.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clients/client5.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="78" column="8" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -76,27 +107,28 @@
         <option value="$PROJECT_DIR$/domain/army.js" />
         <option value="$PROJECT_DIR$/midlewares/repeatMiddlewere.js" />
         <option value="$PROJECT_DIR$/repository/ActivityRepository.js" />
-        <option value="$PROJECT_DIR$/helpers/delayHelper.js" />
         <option value="$PROJECT_DIR$/domain/activity.js" />
         <option value="$PROJECT_DIR$/routes/routes.js" />
-        <option value="$PROJECT_DIR$/helpers/clientStrategy.js" />
         <option value="$PROJECT_DIR$/repository/BattleRepository.js" />
-        <option value="$PROJECT_DIR$/controllers/authController.js" />
         <option value="$PROJECT_DIR$/repository/activityRepository.js" />
         <option value="$PROJECT_DIR$/services/tokenService.js" />
         <option value="$PROJECT_DIR$/helpers/calculateRank.js" />
-        <option value="$PROJECT_DIR$/repository/armyRepository.js" />
-        <option value="$PROJECT_DIR$/services/battleService.js" />
         <option value="$PROJECT_DIR$/controllers/battleController.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/helpers/webHooks.js" />
+        <option value="$PROJECT_DIR$/helpers/delayHelper.js" />
+        <option value="$PROJECT_DIR$/helpers/popMeOut.js" />
+        <option value="$PROJECT_DIR$/clients/client6.js" />
+        <option value="$PROJECT_DIR$/helpers/clientStrategy.js" />
+        <option value="$PROJECT_DIR$/services/battleService.js" />
+        <option value="$PROJECT_DIR$/controllers/authController.js" />
+        <option value="$PROJECT_DIR$/repository/armyRepository.js" />
+        <option value="$PROJECT_DIR$/clients/client1.js" />
         <option value="$PROJECT_DIR$/clients/client3.js" />
         <option value="$PROJECT_DIR$/clients/client4.js" />
-        <option value="$PROJECT_DIR$/clients/client6.js" />
-        <option value="$PROJECT_DIR$/clients/client1.js" />
-        <option value="$PROJECT_DIR$/clients/client2.js" />
         <option value="$PROJECT_DIR$/clients/client5.js" />
+        <option value="$PROJECT_DIR$/clients/client2.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/helpers/webHooks.js" />
       </list>
     </option>
   </component>
@@ -111,7 +143,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -122,22 +153,7 @@
             <path>
               <item name="BattleSimulator" type="b2602c69:ProjectViewProjectNode" />
               <item name="BattleSimulator" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleSimulator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleSimulator" type="462c0819:PsiDirectoryNode" />
-              <item name="repository" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleSimulator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleSimulator" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="BattleSimulator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BattleSimulator" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="clients" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="BattleSimulator" type="b2602c69:ProjectViewProjectNode" />
@@ -147,6 +163,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -199,21 +216,22 @@
       <workItem from="1562869664826" duration="12309000" />
       <workItem from="1562949244966" duration="11989000" />
       <workItem from="1563008487998" duration="27132000" />
-      <workItem from="1563098062709" duration="33491000" />
+      <workItem from="1563098062709" duration="33771000" />
+      <workItem from="1563210686919" duration="15143000" />
+      <workItem from="1563251899435" duration="1910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115324000" />
+    <option name="totallyTimeSpent" value="132657000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="0" width="1924" height="1054" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24986821" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.22413793" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.46875" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="2" />
       <window_info anchor="bottom" id="Docker" order="3" show_stripe_button="false" />
@@ -266,20 +284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/envExample.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="37" lean-forward="true" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/midlewares/repeatMiddlewere.js" />
     <entry file="file://$PROJECT_DIR$/domain/army.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -302,34 +306,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/delayHelper.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/repository/BattleRepository.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/tokenService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/calculateRank.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/repository/BattleRepository.js" />
     <entry file="file://$PROJECT_DIR$/repository/activityRepository.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -340,34 +317,6 @@
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/battleService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/authController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="8" selection-start-column="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/battleController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -375,73 +324,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client1.js">
+    <entry file="file://$PROJECT_DIR$/helpers/calculateRank.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        <state relative-caret-position="162">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client2.js">
+    <entry file="file://$PROJECT_DIR$/helpers/delayHelper.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        <state relative-caret-position="18">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client3.js">
+    <entry file="file://$PROJECT_DIR$/clients/client6.js" />
+    <entry file="file://$PROJECT_DIR$/helpers/popMeOut.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-440">
-          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+        <state relative-caret-position="18">
+          <caret line="1" column="48" lean-forward="true" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client4.js">
+    <entry file="file://$PROJECT_DIR$/helpers/clientStrategy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-422">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+        <state relative-caret-position="461">
+          <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/services/battleService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="36">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client6.js">
+    <entry file="file://$PROJECT_DIR$/helpers/webHooks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="44" column="7" lean-forward="true" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
+        <state relative-caret-position="594">
+          <caret line="45" column="22" selection-start-line="45" selection-start-column="18" selection-end-line="45" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clients/client5.js">
+    <entry file="file://$PROJECT_DIR$/services/tokenService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="24" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="198">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/authController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/battleController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/envExample.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="1" lean-forward="true" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/repository/armyRepository.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+          <caret line="68" column="26" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/webHooks.js">
+    <entry file="file://$PROJECT_DIR$/clients/client1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="259">
+          <caret line="70" column="4" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/helpers/clientStrategy.js">
+    <entry file="file://$PROJECT_DIR$/clients/client3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="26" lean-forward="true" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+        <state relative-caret-position="265">
+          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/client4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="65" column="5" selection-start-line="65" selection-start-column="5" selection-end-line="65" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/client5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="78" column="8" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="78" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/client2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="143" selection-start-line="12" selection-start-column="143" selection-end-line="12" selection-end-column="143" />
         </state>
       </provider>
     </entry>

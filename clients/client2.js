@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const request = require('request')
 const { strategy } = require('../helpers/clientStrategy')
 const { delayFun } = require('../helpers/delayHelper')
+const { popMeOut } = require('../helpers/popMeOut')
 
 const app = express()
 const PORT = 3002
@@ -20,7 +21,7 @@ const army = {
 app.post('/join', (req, res) => {
   console.log(`Tor join`)
   res.status(200).send(token)
-  armies = req.body.data
+  armies = popMeOut(req.body.data, army.name)
 })
 
 app.post('/update', (req, res) => {
@@ -33,8 +34,8 @@ app.post('/leave', (req, res) => {
   console.log('Tor leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
-  res.sendStatus(200)
-  armies = req.body.data
+  res.sendStatus(200).send(token)
+  armies = popMeOut(req.body.data, army.name)
 })
 
 setTimeout(async () => {
@@ -45,10 +46,14 @@ setTimeout(async () => {
       if (i >= army.numOfSquads) {
         return false
       }
-      await delayFun(Math.floor(army.numOfSquads / 10))
+      // await delayFun(Math.floor(army.numOfSquads / 10))
       request.put(`http://localhost:3000/api/attack/${id}/${token}`, (error, response, body) => {
         if (!error) {
           body = JSON.parse(body)
+          if (body.msg) {
+            console.log(body)
+            return false
+          }
           if (body.success) {
             console.log(body)
             return false
@@ -61,9 +66,9 @@ setTimeout(async () => {
       })
     })(0)
   } catch (e) {
-    console.log(e)
+    console.log(e.message)
   }
-}, 11000)
+}, 8000)
 
 setTimeout(() => {
   request.post(
@@ -75,7 +80,7 @@ setTimeout(() => {
       }
     }
   )
-}, 4500)
+}, 3500)
 
 app.listen(PORT, () => {
   console.log(`TOR is listening on port: ${PORT}`)

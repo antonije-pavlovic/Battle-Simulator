@@ -1,5 +1,4 @@
-exports.strategy = (data, type) => {
-
+function strategy (data, type) {
   let armyId = 0
 
   if (type === 'weakest') {
@@ -28,3 +27,4 @@ exports.strategy = (data, type) => {
   }
   return armyId
 }
+module.exports = { strategy }

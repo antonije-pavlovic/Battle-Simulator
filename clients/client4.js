@@ -13,7 +13,7 @@ let token = ''
 
 const army = {
   name: 'Captain America',
-  numOfSquads: 65,
+  numOfSquads: 45,
   webHook: 'http://localhost:3004'
 }
 
@@ -33,7 +33,7 @@ app.post('/leave', (req, res) => {
   console.log('Captain America leave')
   // eslint-disable-next-line prefer-destructuring
   token = req.body.token
-  res.sendStatus(200)
+  res.sendStatus(200).send(token)
   armies = req.body.data
 })
 
@@ -45,7 +45,7 @@ setTimeout(async () => {
       if (i >= army.numOfSquads) {
         return false
       }
-      await delayFun(Math.floor(army.numOfSquads / 10))
+      // await delayFun(Math.floor(army.numOfSquads / 10))
       request.put(`http://localhost:3000/api/attack/${id}/${token}`, (error, response, body) => {
         if (!error) {
           body = JSON.parse(body)
@@ -61,9 +61,9 @@ setTimeout(async () => {
       })
     })(0)
   } catch (e) {
-    console.log(e)
+    console.log(e.message)
   }
-}, 13000)
+}, 8000)
 
 setTimeout(() => {
   request.post(
@@ -75,7 +75,7 @@ setTimeout(() => {
       }
     }
   )
-}, 6500)
+}, 5500)
 
 app.listen(PORT, () => {
   console.log(`CAPTAIN AMERICA is listening on port ${PORT}`)

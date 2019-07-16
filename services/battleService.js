@@ -3,6 +3,8 @@ function chances (numOfSquads) {
 }
 
 function probability (n) {
+  console.log('probability')
+  console.log(n)
   return !!n && Math.random() <= n
 }
 

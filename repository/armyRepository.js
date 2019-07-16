@@ -47,13 +47,6 @@ function joinArmy (token, callback) {
     .catch(() => callback())
 }
 
-async function getAlive () {
-  return Army.find({ squads: { $gt: 0 }, active: true })
-}
-
-function getArmyById (id) {
-  return Army.findById(id)
-}
 function leaveBattle (token) {
   decodeToken(token, config.secret)
     .then(async (data) => {
@@ -77,6 +70,22 @@ async function attack (repeats, token, armyId) {
     .then(async (data) => {
       const army = await getArmyById(data.armyId)
       const attackedArmy = await getArmyById(armyId)
+      if (!army) {
+        return {
+          attack: 'attack unsucessufull',
+          recivedDemage: '0',
+          success: false,
+          msg: 'you are defeated'
+        }
+      }
+      if (!attackedArmy) {
+        return {
+          attack: 'attack unsucessufull',
+          recivedDemage: '0',
+          success: false,
+          msg: 'Choosen army defeated'
+        }
+      }
       const chance = chances(army.squads)
       const prob = probability(chance)
       if (prob) {
@@ -96,7 +105,7 @@ async function attack (repeats, token, armyId) {
           await armyDead(attackedArmy._id)
         }
         const rank = await rankRate(attackedArmy._id, await getOrderedArmies())
-        update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
+        await update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
         return {
           attackDemage,
           recivedDamage,
@@ -106,7 +115,7 @@ async function attack (repeats, token, armyId) {
       // eslint-disable-next-line prefer-promise-reject-errors
       return { attack: 'attack unsucessufull', recivedDemage: '0', success: false }
     }).catch((err) => {
-      console.log(err)
+      console.log(err.message)
     })
 }
 
@@ -124,6 +133,14 @@ async function armyDead (id) {
 function getOrderedArmies () {
   return Army.find({ squads: { $gt: 0 }, active: true }).sort({ squads: 'desc' })
     .then(data => data)
+}
+
+async function getAlive () {
+  return Army.find({ squads: { $gt: 0 }, active: true })
+}
+
+function getArmyById (id) {
+  return Army.findOne({ _id: id, active: true })
 }
 
 module.exports = {
