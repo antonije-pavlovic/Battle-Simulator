@@ -1,18 +1,18 @@
 const Activity = require('../domain/activity')
 
-function battleActivity (army1, action, army2) {
+function battleActivity(army1, action, army2) {
   const activity = new Activity({
     army1,
     action,
-    army2
+    army2,
   })
   activity.save()
 }
 
-function siteActivity (army1, action) {
+function siteActivity(army1, action) {
   const activity = new Activity({
     army1,
-    action
+    action,
   })
   activity.save()
 }

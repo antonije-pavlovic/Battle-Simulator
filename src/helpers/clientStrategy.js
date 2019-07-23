@@ -1,4 +1,4 @@
-function strategy (data, type) {
+function strategy(data, type) {
   let armyId = 0
 
   if (type === 'weakest') {

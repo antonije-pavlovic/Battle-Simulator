@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "server": "node server",
-    "client1": "node ./clients/client1",
-    "client2": "node ./clients/client2",
-    "client3": "node ./clients/client3",
-    "client4": "node ./clients/client4",
-    "client5": "node ./clients/client5",
-    "start": "concurrently \"npm run server\" \"npm run client1\" \"npm run client2\" \"npm run client3\" \"npm run client4\" \"npm run client5\""
+    "client1": "node src/clients/client1",
+    "client2": "node src/clients/client2",
+    "client3": "node src/clients/client3",
+    "client4": "node src/clients/client4",
+    "client5": "node src/clients/client5",
+    "start": "concurrently \"npm run server\" "
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "concurrently": "^4.1.1",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "http": "0.0.0",
     "jsonwebtoken": "^8.5.1",

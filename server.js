@@ -1,23 +1,30 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const routes = require('./routes/routes')
+const { fork } = require('child_process')
+const routes = require('./src/routes/routes')
+const players = require('./src/players')
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.SERVER_PORT
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 routes(app)
-mongoose.connect('mongodb://localhost/battle', { useNewUrlParser: true })
+console.log(PORT)
+mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
   .then(() => {
     console.log('connected to database')
   })
   .catch((err) => {
-    console.log(err)
+    server.close()
+    console.log(err.message)
   })
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log('server is running')
 })
+
+players.map(player => fork('src/clients/client.js').send(player))

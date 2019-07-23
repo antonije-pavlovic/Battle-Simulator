@@ -1,6 +1,5 @@
 const Army = require('../domain/army')
 const { getToken, decodeToken } = require('../services/tokenService')
-const config = require('../env')
 const { join, leave, update } = require('../helpers/webHooks')
 const { siteActivity, battleActivity } = require('./activityRepository')
 const { rankRate } = require('../helpers/calculateRank')
@@ -8,65 +7,64 @@ const {
   chances,
   probability,
   attackDamage,
-  recivedDemage
+  recivedDemage,
 } = require('../services/battleService')
 
-function register (name, squads, webHook) {
-  return new Promise((resolve, reject) => {
+function register(name, squads, webHook) {
+  return new Promise(async (resolve, reject) => {
     const army = new Army({
       name,
       squads,
       webHook,
-      active: true
+      active: true,
     })
-    army.save()
-    const armies = getAlive()
-    join(army, armies, 'new')
+    await army.save()
+    const armies = await getAlive()
+    await join(army, armies, 'new')
     siteActivity(name, 'registered')
     const armyId = army._id
-    getToken(
+    const token = await getToken(
       { armyId, name, webHook },
-      config.secret,
+      process.env.TOKEN_SECRET,
       {
-        tokenLife: config.tokenLife
-      }
-    ).then(token => resolve(token))
+        tokenLife: process.env.TOKEN_LIFE,
+      },
+    )
+    return resolve(token)
   })
 }
 
-function joinArmy (token, callback) {
-  decodeToken(token, config.secret)
-    .then(async (data) => {
-      // console.log(data)
-      const army = await Army.findOne({ _id: data.armyId })
-      army.active = true
-      siteActivity(data.name, 'returned')
-      join(data, getAlive(), 'returned')
-      return callback(data)
-    })
-    .catch(() => callback())
+async function joinArmy(token, callback) {
+  try {
+    const data = await decodeToken(token, process.env.TOKEN_SECRET)
+    const army = await Army.findOne({ _id: data.armyId })
+    army.active = true
+    siteActivity(data.name, 'returned')
+    const armies = await getAlive()
+    await join(data, armies, 'returned')
+    return callback(data)
+  } catch (e) {
+    console.log(e)
+    return callback()
+  }
 }
 
-function leaveBattle (token) {
-  decodeToken(token, config.secret)
-    .then(async (data) => {
-      let type
-      // eslint-disable-next-line no-underscore-dangle
-      const army = await Army.findOne({ _id: data.armyId })
-      army.active = false
-      army.save()
-        .then(() => {
-          siteActivity(data.name, 'leave')
-          // eslint-disable-next-line no-underscore-dangle
-          leave(army._id, getAlive(), type)
-        })
-    }).catch((err) => {
-      console.log(err)
-    })
+async function leaveBattle(token) {
+  try {
+    const data = await decodeToken(token, process.env.TOKEN_SECRET)
+    const army = await Army.findOne({ _id: data.armyId })
+    army.active = false
+    await army.save()
+    siteActivity(data.name, 'leave')
+    const armies = await getAlive()
+    await leave(army._id, armies, 'leave')
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-async function attack (repeats, token, armyId) {
-  return decodeToken(token, config.secret)
+async function attack(repeats, token, armyId) {
+  return decodeToken(token, process.env.TOKEN_SECRET)
     .then(async (data) => {
       const army = await getArmyById(data.armyId)
       const attackedArmy = await getArmyById(armyId)
@@ -75,7 +73,7 @@ async function attack (repeats, token, armyId) {
           attack: 'attack unsucessufull',
           recivedDemage: '0',
           success: false,
-          msg: 'you are defeated'
+          msg: 'you are defeated',
         }
       }
       if (!attackedArmy) {
@@ -83,7 +81,7 @@ async function attack (repeats, token, armyId) {
           attack: 'attack unsucessufull',
           recivedDemage: '0',
           success: false,
-          msg: 'Choosen army defeated'
+          msg: 'Choosen army defeated',
         }
       }
       const chance = chances(army.squads)
@@ -94,8 +92,8 @@ async function attack (repeats, token, armyId) {
         const recivedDamage = recivedDemage(attackedArmy.squads)
         attackedArmy.squads -= attackDemage
         army.squads -= recivedDamage
-        attackedArmy.save()
-        army.save()
+        await attackedArmy.save()
+        await army.save()
         if (army.squads <= 0) {
           battleActivity(attackedArmy.name, 'killed', army.name)
           await armyDead(army._id)
@@ -104,42 +102,45 @@ async function attack (repeats, token, armyId) {
           battleActivity(army.name, 'killed', attackedArmy.name)
           await armyDead(attackedArmy._id)
         }
-        const rank = await rankRate(attackedArmy._id, await getOrderedArmies())
+        const orderedArmies = await getOrderedArmies()
+        const rank = await rankRate(attackedArmy._id, orderedArmies)
         await update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
         return {
           attackDemage,
           recivedDamage,
-          success: true
+          success: true,
         }
       }
-      // eslint-disable-next-line prefer-promise-reject-errors
       return { attack: 'attack unsucessufull', recivedDemage: '0', success: false }
     }).catch((err) => {
       console.log(err.message)
     })
 }
 
-async function armyDead (id) {
-  const army = await Army.findOne(id)
-  army.active = false
-  army.save()
-    .then(() => {
-      siteActivity(army.name, 'dead')
-      // eslint-disable-next-line no-underscore-dangle
-      leave(army._id, getAlive(), 'dead')
-    })
+async function armyDead(id) {
+  try {
+    const army = await Army.findOne(id)
+    army.active = false
+    await army.save()
+    siteActivity(army.name, 'dead')
+    console.log(army)
+    // eslint-disable-next-line no-underscore-dangle
+    const armies = await getAlive()
+    await leave(army._id, armies, 'dead')
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-function getOrderedArmies () {
+function getOrderedArmies() {
   return Army.find({ squads: { $gt: 0 }, active: true }).sort({ squads: 'desc' })
-    .then(data => data)
 }
 
-async function getAlive () {
+function getAlive() {
   return Army.find({ squads: { $gt: 0 }, active: true })
 }
 
-function getArmyById (id) {
+function getArmyById(id) {
   return Army.findOne({ _id: id, active: true })
 }
 
@@ -147,5 +148,5 @@ module.exports = {
   register,
   joinArmy,
   attack,
-  leaveBattle
+  leaveBattle,
 }
