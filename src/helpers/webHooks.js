@@ -6,8 +6,6 @@ exports.join = async (army, armies, type) => {
     db: { urls: armies.map(url => url.webHook) },
     httpSuccessCodes: [200, 201],
   })
-  console.log('---------------------------------');
-  console.log(armies);
   const { urls } = await hooks.getDB()
   urls.map(url => hooks.add('join', `${url}/join`))
   hooks.trigger('join', { armies, type, army })

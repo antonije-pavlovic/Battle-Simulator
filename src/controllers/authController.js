@@ -1,6 +1,6 @@
 const { register, joinArmy } = require('../repository/armyRepository')
 
-exports.registerArmy = async (req, res) => {
+exports.registerArmy = (req, res) => {
   const { name, numOfSquads, webHook } = req.body
   if (numOfSquads < 10 || numOfSquads > 100) {
     return res.status(422).send('Allowed num of squads: min 10, max 100')
@@ -8,7 +8,7 @@ exports.registerArmy = async (req, res) => {
   if (!name || !webHook) {
     return res.status(422).send('Enter name and webHook')
   }
-  await register(name, numOfSquads, webHook)
+  register(name, numOfSquads, webHook)
     .then(token => res.json({ statusCode: 200, token }))
 }
 

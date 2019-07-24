@@ -1,6 +1,0 @@
-{
-  "secret": "some hash value",
-  "tokenLife": "life time of token value - integer"
-}
-
-// name and type of the file should be env.json

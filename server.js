@@ -12,19 +12,15 @@ const PORT = process.env.SERVER_PORT
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-routes(app)
-console.log(PORT)
-mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
-  .then(() => {
-    console.log('connected to database')
-  })
-  .catch((err) => {
-    server.close()
-    console.log(err.message)
-  })
-
-const server = app.listen(PORT, () => {
-  console.log('server is running')
-})
-
-players.map(player => fork('src/clients/client.js').send(player))
+routes(app);
+(async () => {
+  try {
+    await mongoose.connect(process.env.DB_HOST, { useNewUrlParser: true })
+    app.listen(PORT, () => {
+      console.log('server is running')
+    })
+    players.map(player => fork('src/clients/client.js').send(player))
+  } catch (e) {
+    process.exit(1)
+  }
+})()

@@ -10,28 +10,25 @@ const {
   recivedDemage,
 } = require('../services/battleService')
 
-function register(name, squads, webHook) {
-  return new Promise(async (resolve, reject) => {
-    const army = new Army({
-      name,
-      squads,
-      webHook,
-      active: true,
-    })
-    await army.save()
-    const armies = await getAlive()
-    await join(army, armies, 'new')
-    siteActivity(name, 'registered')
-    const armyId = army._id
-    const token = await getToken(
-      { armyId, name, webHook },
-      process.env.TOKEN_SECRET,
-      {
-        tokenLife: process.env.TOKEN_LIFE,
-      },
-    )
-    return resolve(token)
+async function register(name, squads, webHook) {
+  const army = new Army({
+    name,
+    squads,
+    webHook,
+    active: true,
   })
+  await army.save()
+  const armies = await getAlive()
+  await join(army, armies, 'new')
+  siteActivity(name, 'registered')
+  const armyId = army._id
+  return getToken(
+    { armyId, name, webHook },
+    process.env.TOKEN_SECRET,
+    {
+      tokenLife: process.env.TOKEN_LIFE,
+    },
+  )
 }
 
 async function joinArmy(token, callback) {
@@ -64,57 +61,58 @@ async function leaveBattle(token) {
 }
 
 async function attack(repeats, token, armyId) {
-  return decodeToken(token, process.env.TOKEN_SECRET)
-    .then(async (data) => {
-      const army = await getArmyById(data.armyId)
-      const attackedArmy = await getArmyById(armyId)
-      if (!army) {
-        return {
-          attack: 'attack unsucessufull',
-          recivedDemage: '0',
-          success: false,
-          msg: 'you are defeated',
-        }
+  try {
+    const data = await decodeToken(token, process.env.TOKEN_SECRET)
+    const army = await getArmyById(data.armyId)
+    const attackedArmy = await getArmyById(armyId)
+    if (!army) {
+      return {
+        attack: 'attack unsucessufull',
+        recivedDemage: '0',
+        success: false,
+        msg: 'you are defeated',
       }
-      if (!attackedArmy) {
-        return {
-          attack: 'attack unsucessufull',
-          recivedDemage: '0',
-          success: false,
-          msg: 'Choosen army defeated',
-        }
+    }
+    if (!attackedArmy) {
+      return {
+        attack: 'attack unsucessufull',
+        recivedDemage: '0',
+        success: false,
+        msg: 'Choosen army defeated',
       }
-      const chance = chances(army.squads)
-      const prob = probability(chance)
-      if (prob) {
-        battleActivity(army.name, 'succeffuly attacked', attackedArmy.name)
-        const attackDemage = attackDamage(repeats, army.squads)
-        const recivedDamage = recivedDemage(attackedArmy.squads)
-        attackedArmy.squads -= attackDemage
-        army.squads -= recivedDamage
-        await attackedArmy.save()
-        await army.save()
-        if (army.squads <= 0) {
-          battleActivity(attackedArmy.name, 'killed', army.name)
-          await armyDead(army._id)
-        }
-        if (attackedArmy.squads <= 0) {
-          battleActivity(army.name, 'killed', attackedArmy.name)
-          await armyDead(attackedArmy._id)
-        }
-        const orderedArmies = await getOrderedArmies()
-        const rank = await rankRate(attackedArmy._id, orderedArmies)
-        await update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
-        return {
-          attackDemage,
-          recivedDamage,
-          success: true,
-        }
+    }
+    const chance = chances(army.squads)
+    const prob = probability(chance)
+    if (prob) {
+      battleActivity(army.name, 'succeffuly attacked', attackedArmy.name)
+      const attackDemage = attackDamage(repeats, army.squads)
+      const recivedDamage = recivedDemage(attackedArmy.squads)
+      attackedArmy.squads -= attackDemage
+      army.squads -= recivedDamage
+      await attackedArmy.save()
+      await army.save()
+      if (army.squads <= 0) {
+        battleActivity(attackedArmy.name, 'killed', army.name)
+        await armyDead(army._id)
       }
-      return { attack: 'attack unsucessufull', recivedDemage: '0', success: false }
-    }).catch((err) => {
-      console.log(err.message)
-    })
+      if (attackedArmy.squads <= 0) {
+        battleActivity(army.name, 'killed', attackedArmy.name)
+        await armyDead(attackedArmy._id)
+      }
+      const orderedArmies = await getOrderedArmies()
+      const rank = await rankRate(attackedArmy._id, orderedArmies)
+      await update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
+      return {
+        attackDemage,
+        recivedDamage,
+        success: true,
+      }
+    }
+    return { attack: 'attack unsucessufull', recivedDemage: '0', success: false }
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
 }
 
 async function armyDead(id) {
