@@ -1,23 +1,23 @@
-const { register, joinArmy } = require('../repository/armyRepository')
+const { register, joinArmy } = require('../services/armyService')
 
-exports.registerArmy = (req, res) => {
-  const { name, numOfSquads, webHook } = req.body
+exports.registerArmy = async (obj) => {
+  const { name, numOfSquads, webHook } = obj
   if (numOfSquads < 10 || numOfSquads > 100) {
-    return res.status(422).send('Allowed num of squads: min 10, max 100')
+    throw new Error('Allowed num of squads: min 10, max 100')
   }
   if (!name || !webHook) {
-    return res.status(422).send('Enter name and webHook')
+    throw new Error('Enter name and webHook')
   }
-  register(name, numOfSquads, webHook)
-    .then(token => res.json({ statusCode: 200, token }))
+  const token = await register(name, numOfSquads, webHook)
+  return token
 }
 
-exports.joinArmy = (req, res) => {
-  joinArmy(req.params.token, (data) => {
+exports.joinArmy = (token) => {
+  joinArmy(token, (data) => {
     console.log(data)
     if (data) {
-      return res.json({ statusCode: 200, message: 'Succesufylly joined' })
+      return { statusCode: 200, message: 'Succesufylly joined' }
     }
-    return res.json({ statusCode: 401, message: 'Unauthorized access' })
+    throw new Error('Unauthorized access')
   })
 }

@@ -1,16 +1,16 @@
-const { leaveBattle, attack } = require('../repository/armyRepository')
+const { leaveBattle, attack } = require('../services/armyService')
 
 const counters = {}
 
-exports.attack = (req, res) => {
-  const { token, armyId } = req.params
+exports.attack = async (obj) => {
+  const { token, armyId } = obj
   if (!token) {
-    return res.sendStatus(401).json('Token isnt provided')
+    throw new Error('Token isnt provided')
   }
   counters[token] += 1
-  attack(counters[token], token, armyId)
-    .then(battleStatistic => res.status(200).send(battleStatistic))
-    .catch(battleStatistic => res.status(201).send(battleStatistic))
+  const battleStatistic = await attack(counters[token], token, armyId)
+  console.log(battleStatistic)
+  return battleStatistic
 }
 
 exports.leave = (req, res) => {
