@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken')
-
+/**
+ * generate new token
+*/
 function getToken(army, secret, options) {
   return new Promise((resolve, reject) => {
     const token = jwt.sign(army, secret, { expiresIn: options.tokenLife })
@@ -7,6 +9,9 @@ function getToken(army, secret, options) {
   })
 }
 
+/**
+ * verify and decode token
+ */
 function decodeToken(token, secret) {
   return new Promise((resolve, reject) => {
     jwt.verify(token, secret, (err, decode) => {

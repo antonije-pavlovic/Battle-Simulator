@@ -1,3 +1,6 @@
+/**
+  * choosing army to attack based on client strategy
+ */
 function strategy(data, type) {
   let armyId = 0
 

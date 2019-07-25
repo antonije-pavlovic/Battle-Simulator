@@ -15,6 +15,13 @@ const {
   insertArmy,
 } = require('../repository/armyRepository')
 
+/**
+ * when army hit join route without token this function is called
+ * it insert new army in database, then get all alive armies
+ * and trigger the join webhook and send them joined army
+ * and return token
+ * and  record th activity
+ */
 async function register(name, squads, webHook) {
   const army = await insertArmy(name, squads, webHook)
   const armies = await getAlive()
@@ -30,6 +37,11 @@ async function register(name, squads, webHook) {
   )
 }
 
+/**
+ * if army was left the battle and want to come back this functions is called
+ * verify token, get all allive armies
+ * and trigger join webhook to notify them that army had returned
+ */
 async function joinArmy(token, callback) {
   try {
     const data = await decodeToken(token, process.env.TOKEN_SECRET)
@@ -45,6 +57,11 @@ async function joinArmy(token, callback) {
   }
 }
 
+/**
+ * if army want to leave this function is called
+ * verify token, then set army active property to false
+ * so army cannot be chosen with getAlive() function
+ */
 async function leaveBattle(token) {
   try {
     const data = await decodeToken(token, process.env.TOKEN_SECRET)
@@ -59,9 +76,17 @@ async function leaveBattle(token) {
   }
 }
 
+/**
+ *this function is called when army attack another army
+ * first check if any army is already defeated
+ * then calculate chances of successful attack based on squads number
+ * then only if probability is true army can damage attacked army
+ * if attack was successful i trigger update webhook to notify attackedArmy
+ * also if any army remains without squads i call deadArmy function
+ * and record the activity
+ */
 async function attack(repeats, token, armyId) {
   try {
-    console.log('1')
     const data = await decodeToken(token, process.env.TOKEN_SECRET)
     const army = await getArmyById(data.armyId)
     const attackedArmy = await getArmyById(armyId)
@@ -73,7 +98,6 @@ async function attack(repeats, token, armyId) {
         msg: 'you are defeated',
       }
     }
-    console.log('2')
     if (!attackedArmy) {
       return {
         attack: 'attack unsucessufull',
@@ -84,7 +108,6 @@ async function attack(repeats, token, armyId) {
     }
     const chance = chances(army.squads)
     const prob = probability(chance)
-    console.log('3')
     if (prob) {
       battleActivity(army.name, 'succeffuly attacked', attackedArmy.name)
       const attackDemage = attackDamage(repeats, army.squads)
@@ -104,14 +127,12 @@ async function attack(repeats, token, armyId) {
       const orderedArmies = await getOrderedArmies()
       const rank = await rankRate(attackedArmy._id, orderedArmies)
       await update([attackedArmy], { squadsCount: attackedArmy.squads, rank })
-      console.log('4')
       return {
         attackDemage,
         recivedDamage,
         success: true,
       }
     }
-    console.log('5')
     return { attack: 'attack unsucessufull', recivedDemage: '0', success: false }
   } catch (e) {
     console.log(e)
@@ -119,6 +140,11 @@ async function attack(repeats, token, armyId) {
   }
 }
 
+/**
+ * called when army is defeated - I suppose that army is dead if it has less then 0 squads
+ * first i get dead army and set it active property to false
+ * record the activity and trigger the leave webhook to notify others armies that this army is dead
+ */
 async function armyDead(id) {
   try {
     const army = await getArmyById(id)
